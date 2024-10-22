@@ -1,5 +1,5 @@
 import React from "react";
-import CollapisbleCard from "../ui/collapisble-card";
+import CollapisbleCard, { CollapsibleTitle } from "../ui/collapisble-card";
 import Link from "next/link";
 
 export default function Boards({ className }: { className?: string }) {
@@ -48,6 +48,11 @@ export default function Boards({ className }: { className?: string }) {
 
   return (
     <CollapisbleCard title="Boards" className={"space-y-6 " + className}>
+      <CollapsibleTitle>
+        <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">
+          Boards
+        </h2>
+      </CollapsibleTitle>
       <div className=" pb-2 tasks-container md:max-h-[300px] md:overflow-y-scroll px-1">
         {boards.map((board) => (
           <div key={board.id}>

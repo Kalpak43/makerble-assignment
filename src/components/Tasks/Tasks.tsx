@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CollapisbleCard from "../ui/collapisble-card";
+import CollapisbleCard, { CollapsibleTitle } from "../ui/collapisble-card";
 import TaskCard from "../ui/task-card";
 import TaskAdder from "../ui/add-task";
 import { tasks as initialTasks } from "@/fakeDB/task";
@@ -48,6 +48,11 @@ export default function Tasks({ className }: { className?: string }) {
 
   return (
     <CollapisbleCard title="tasks" className={"space-y-6 " + className}>
+      <CollapsibleTitle>
+        <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">
+          Tasks
+        </h2>
+      </CollapsibleTitle>
       <div className="space-y-4 pb-2 ">
         <TaskAdder addTask={addTask} />
         <div className="space-y-4 tasks-container md:max-h-[300px] md:overflow-y-scroll px-1">

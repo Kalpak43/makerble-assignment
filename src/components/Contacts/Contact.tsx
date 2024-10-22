@@ -1,5 +1,5 @@
 import React from "react";
-import CollapisbleCard from "../ui/collapisble-card";
+import CollapisbleCard, { CollapsibleTitle } from "../ui/collapisble-card";
 import ContactCard from "../ui/contact-card";
 
 export default function Contact({ className }: { className?: string }) {
@@ -62,6 +62,11 @@ export default function Contact({ className }: { className?: string }) {
 
   return (
     <CollapisbleCard title="Contacts" className={"space-y-6 " + className}>
+      <CollapsibleTitle>
+        <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">
+          Contacts
+        </h2>
+      </CollapsibleTitle>
       <div className=" pb-2 tasks-container md:max-h-[300px] md:overflow-y-scroll px-1">
         {contacts.map((contact) => (
           <ContactCard key={contact.email} {...contact} />
