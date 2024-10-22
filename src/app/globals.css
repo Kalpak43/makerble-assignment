@@ -36,8 +36,7 @@
   .container {
     max-width: unset;
     background-color: var(--container);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    @apply py-4 px-4;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   }
 
   .horizontal-list {
@@ -61,6 +60,8 @@
   --bg-color: #eaedf1;
   --container: #fff;
   --btn-primary: #ee364a;
+  --btn-primary-hov: #d52237;
+
   --btn-secondary: #337ab7;
   --text-base: #555555;
   --text-heading: #3179b6;
@@ -68,17 +69,54 @@
 
 body {
   background-color: var(--bg-color);
+  font-family: var(--montserrat);
+
+}
+::-webkit-scrollbar {
+  width: 6px;
+  padding: 2px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(209, 209, 209);
+  margin-left: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #7bb33e;
+  border-radius: 9999px; /* Fully rounded */
+  border: transparent;
 }
 
 main {
-  @apply pl-16;
+  @apply pl-4 md:pl-20 pr-4 py-4;
 }
 
 .btn {
   aspect-ratio: 1/1;
-  @apply p-2 rounded-full;
+  @apply p-2 rounded-full transition-all duration-300;
 }
 
 .btn:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.low {
+  @apply border-[#feaf1f] bg-[#feaf1f] bg-opacity-20;
+}
+.medium {
+  @apply border-[#f97116] bg-[#f97116] bg-opacity-20;
+}
+.high {
+  @apply border-[#f34231] bg-[#f34231] bg-opacity-20;
+}
+.complete {
+  @apply border-[#2dce89] bg-[#2dce89] bg-opacity-20;
 }

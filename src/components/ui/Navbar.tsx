@@ -31,7 +31,7 @@ export default function Navbar({
   const [revealSearch, setRevealSearch] = React.useState(false);
 
   return (
-    <header className="container justify-between flex items-center md:horizontal-list sticky top-0 inset-x-0 z-50">
+    <header className="container py-4 px-4 justify-between flex items-center md:horizontal-list sticky top-0 inset-x-0 z-50">
       <div className="horizontal-list">
         <button
           className="h-[40px] md:hidden"

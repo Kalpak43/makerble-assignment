@@ -1,0 +1,46 @@
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+
+export default function CollapisbleCard({
+  title,
+  className,
+  children,
+}: {
+  title: string;
+  className?: string;
+  children?: React.ReactNode;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  return (
+    <div className={`container py-2 px-4 rounded-lg ${className}`}>
+      <div className="flex justify-between items-center">
+        <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">{title}</h2>
+        <button className="btn" onClick={toggleExpand}>
+          <ChevronDown />
+        </button>
+      </div>
+      <AnimatePresence initial={false}>
+        {isExpanded && (
+          <motion.div
+            initial="collapsed"
+            animate="expanded"
+            exit="collapsed"
+            variants={{
+              expanded: { height: "auto" },
+              collapsed: { height: 0 },
+            }}
+            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* {children} */}
+    </div>
+  );
+}
