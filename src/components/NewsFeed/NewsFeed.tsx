@@ -12,7 +12,7 @@ export default function NewsFeed() {
             <Plus className="inline" size={20} /> 
         </Button>
       </div>
-      <div className="md:max-h-[800px] md:overflow-y-scroll grid lg:max-xl:grid-cols-2 gap-4">
+      <div className="md:max-h-[835px] md:overflow-y-scroll grid lg:max-xl:grid-cols-2 gap-4">
         <NewsCard />
         <NewsCard />
         <NewsCard />
