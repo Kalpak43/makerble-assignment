@@ -1,80 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import CollapisbleCard from "../ui/collapisble-card";
 import TaskCard from "../ui/task-card";
 import TaskAdder from "../ui/add-task";
+import { tasks as initialTasks } from "@/fakeDB/task";
 
-export default function Tasks() {
+export default function Tasks({ className }: { className?: string }) {
+  const [tasks, setTasks] = useState(
+    initialTasks
+      .sort((a, b) => b.priority - a.priority)
+      .sort((a, b) => Number(a.completed) - Number(b.completed))
+  );
+
   const priority = {
     0: "low",
     1: "medium",
     2: "high",
   };
 
-  const tasks = [
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Description 1",
-      completed: false,
-      priority: 0,
-    },
-    {
-      id: 2,
-      title: "Task 2",
-      description: "Description 2",
-      completed: true,
+  const toggleTaskCompletion = (taskId: number) => {
+    setTasks((prevTasks) =>
+      prevTasks
+        .map((task) =>
+          task.id === taskId ? { ...task, completed: !task.completed } : task
+        )
+        .sort((a, b) => b.priority - a.priority)
+        .sort((a, b) => Number(a.completed) - Number(b.completed))
+    );
+  };
 
-      priority: 1,
-    },
-    {
-      id: 3,
-      title: "Task 3",
-      description: "Description 3",
-      completed: false,
-      priority: 2,
-    },
-    {
-      id: 4,
-      title: "Task 4",
-      description: "Description 4",
-      completed: true,
-      priority: 0,
-    },
-    {
-      id: 5,
-      title: "Task 5",
-      description: "Description 5",
-      completed: false,
-      priority: 1,
-    },
-    {
-      id: 6,
-      title: "Task 6",
-      description: "Description 6",
-      completed: true,
-      priority: 2,
-    },
-    {
-      id: 8,
-      title: "Task 6",
-      description: "Description 6",
-      completed: true,
-      priority: 2,
-    },
-  ];
+  const addTask = (task: (typeof initialTasks)[0]) => {
+    setTasks((prevTasks) =>
+      [
+        ...prevTasks,
+        {
+          ...task,
+          id: prevTasks.length + 1,
+        },
+      ]
+        .sort((a, b) => b.priority - a.priority)
+        .sort((a, b) => Number(a.completed) - Number(b.completed))
+    );
+  };
 
-  tasks.sort((a, b) => b.priority - a.priority);
+  const removeTask = (taskId: number) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  };
 
   return (
-    <CollapisbleCard title="tasks" className="space-y-6">
+    <CollapisbleCard title="tasks" className={"space-y-6 " + className}>
       <div className="space-y-4 pb-2 ">
-        <TaskAdder />
+        <TaskAdder addTask={addTask} />
         <div className="space-y-4 tasks-container md:max-h-[300px] md:overflow-y-scroll px-1">
           {tasks.map((task) => (
             <TaskCard
               key={task.id}
               task={task}
-              className={task.completed ? "complete" : priority[task.priority as keyof typeof priority]}
+              toggleTaskCompletion={toggleTaskCompletion}
+              removeTask={removeTask}
+              className={
+                task.completed
+                  ? "complete"
+                  : priority[task.priority as keyof typeof priority]
+              }
             />
           ))}
         </div>

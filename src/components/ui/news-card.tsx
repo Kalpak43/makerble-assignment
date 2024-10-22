@@ -17,8 +17,22 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
+import { users } from "@/fakeDB/users";
+import Image from "next/image";
 
-export default function NewsCard() {
+export default function NewsCard({
+  id,
+  content,
+  tag,
+  createdOn,
+  editedOn,
+}: {
+  id: number;
+  content: string;
+  tag: string;
+  createdOn: Date;
+  editedOn: Date;
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hideCommentBar, setHideCommentBar] = useState(true);
 
@@ -43,45 +57,64 @@ export default function NewsCard() {
         </DropdownMenuContent>
       </DropdownMenu>
       <div className="flex items-center gap-2">
-        <div className="h-12 border-2 aspect-square rounded-full"></div>
+        <div className="h-12 border-2 aspect-square rounded-full">
+          <Image
+            src={users[id].profile}
+            alt={users[id].name}
+            width={48}
+            height={48}
+            className="rounded-full"
+          />
+        </div>
         <div>
-          <h3 className="font-[600]">Kalpak</h3>
-          <h4 className="text-xs">1d ago</h4>
+          <h3 className="font-[600]">{users[id].name}</h3>
+          <h4 className="text-xs">
+            <span>
+              {new Intl.DateTimeFormat("en-US", {
+                dateStyle: "medium",
+                timeStyle: "short",
+              }).format(createdOn)}
+            </span>{" "}
+            (
+            <span className="font-[600]">
+              edited on{" "}
+              {new Intl.DateTimeFormat("en-US", {
+                dateStyle: "medium",
+                timeStyle: "short",
+              }).format(editedOn)}
+            </span>
+            )
+          </h4>
         </div>
       </div>
       <div className="flex gap-1 overflow-x-scroll hide-scrollbar">
         <span className="rounded-full text-xs font-[600] py-1 px-2 bg-green-300">
-          PHQ9
+          {tag}
         </span>
       </div>
       <div className="px-4 post-content">
         <p className={`text-sm ${isExpanded ? "" : "line-clamp-3"} relative`}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-          pellentesque, eros nec luctus. Sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum.
-          {!isExpanded && (
+          {content}
+          {content.length > 200 && !isExpanded && (
             <span className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent"></span>
           )}
         </p>
-        <button
-          onClick={toggleExpand}
-          className="mt-2 flex items-center text-blue-500 hover:text-blue-700"
-        >
-          {isExpanded ? (
-            <>
-              Read less <ChevronUp className="ml-1 h-4 w-4" />
-            </>
-          ) : (
-            <>
-              Read more <ChevronDown className="ml-1 h-4 w-4" />
-            </>
-          )}
-        </button>
+        {content.length > 200 && (
+          <button
+            onClick={toggleExpand}
+            className="mt-2 flex items-center text-blue-500 hover:text-blue-700"
+          >
+            {isExpanded ? (
+              <>
+                Read less <ChevronUp className="ml-1 h-4 w-4" />
+              </>
+            ) : (
+              <>
+                Read more <ChevronDown className="ml-1 h-4 w-4" />
+              </>
+            )}
+          </button>
+        )}
       </div>
       <hr />
       <div className="relative">

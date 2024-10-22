@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Trash2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 export default function TaskCard({
   task,
+  toggleTaskCompletion,
+  removeTask,
   className,
 }: {
   task: {
@@ -11,10 +15,10 @@ export default function TaskCard({
     description: string;
     completed: boolean;
   };
+  toggleTaskCompletion: (taskId: number) => void;
+  removeTask: (taskId: number) => void;
   className?: string;
 }) {
-  const [completed, setCompleted] = useState(task.completed || false);
-
   return (
     <div
       className={
@@ -26,12 +30,24 @@ export default function TaskCard({
       <div className="flex items-center gap-2">
         <Checkbox
           id="terms"
-          checked={completed}
+          checked={task.completed}
           onClick={() => {
-            setCompleted(!completed);
+            toggleTaskCompletion(task.id);
           }}
         />
-        {/* <button className="btn">Edit</button> */}
+        <button
+          className=""
+          onClick={() => {
+            removeTask(task.id);
+            toast({
+              variant: "destructive",
+              title: "Task Removed",
+              description: "Task has been removed from the list",
+            });
+          }}
+        >
+          <Trash2 size={16} />
+        </button>
       </div>
     </div>
   );

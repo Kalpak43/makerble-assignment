@@ -2,7 +2,7 @@ import React from "react";
 import CollapisbleCard from "../ui/collapisble-card";
 import Link from "next/link";
 
-export default function Events() {
+export default function Events({ className }: { className?: string }) {
   const events = [
     {
       id: 1,
@@ -71,7 +71,7 @@ export default function Events() {
   ];
 
   return (
-    <CollapisbleCard title="Events" className="space-y-6">
+    <CollapisbleCard title="Events" className={"space-y-6 " + className}>
       <div className=" pb-2 tasks-container md:max-h-[300px] md:overflow-y-scroll px-1">
         {events.map((event) => (
           <div key={event.id}>

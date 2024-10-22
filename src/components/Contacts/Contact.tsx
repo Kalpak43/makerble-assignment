@@ -2,7 +2,7 @@ import React from "react";
 import CollapisbleCard from "../ui/collapisble-card";
 import ContactCard from "../ui/contact-card";
 
-export default function Contact() {
+export default function Contact({ className }: { className?: string }) {
   const contacts = [
     {
       id: 1,
@@ -61,7 +61,7 @@ export default function Contact() {
   ];
 
   return (
-    <CollapisbleCard title="Contacts" className="space-y-6">
+    <CollapisbleCard title="Contacts" className={"space-y-6 " + className}>
       <div className=" pb-2 tasks-container md:max-h-[300px] md:overflow-y-scroll px-1">
         {contacts.map((contact) => (
           <ContactCard key={contact.email} {...contact} />

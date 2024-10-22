@@ -3,6 +3,7 @@
 import {Montserrat} from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation/Navigation";
+import { Toaster } from "@/components/ui/toaster";
 
 
 const montserrat = Montserrat({
@@ -25,6 +26,7 @@ export default function RootLayout({
       >
         <Navigation />
         {children}
+        <Toaster />
       </body>
     </html>
   );
