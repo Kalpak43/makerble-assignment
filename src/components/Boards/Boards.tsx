@@ -56,7 +56,7 @@ export default function Boards({ className }: { className?: string }) {
   };
 
   return (
-    <CollapisbleCard title="Boards" className={"space-y-6 " + className}>
+    <CollapisbleCard className={"space-y-6 " + className}>
       <CollapsibleTitle>
         <div className="flex-1 flex items-center justify-between gap-2">
           <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">

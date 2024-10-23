@@ -100,7 +100,7 @@ export default function GlobalSearch({
           </div>
           <div className="space-y-2 border-b-2">
             <h3 className="font-[600]">
-              Contacts({searchResults.contacts.length} Results found):
+              Contacts ({searchResults.contacts.length} Results found):
             </h3>
             <div className=" divide-y-2">
               {searchResults.contacts.map((contact) => {

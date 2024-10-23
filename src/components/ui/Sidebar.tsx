@@ -10,6 +10,7 @@ import {
   Ellipsis,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function Sidebar({
   expanded,
@@ -19,11 +20,10 @@ export default function Sidebar({
   closeSidebar: () => void;
 }) {
   const navItems = [
-    { name: "Home", icon: Home },
-    { name: "Projects", icon: FolderGit2 },
-    { name: "Organisations", icon: Building2 },
-    { name: "Albums", icon: Images },
-    { name: "More", icon: Ellipsis },
+    { link: "/", name: "Home", icon: Home },
+    { link: "/projects", name: "Projects", icon: FolderGit2 },
+    { link: "/organisations", name: "Organisations", icon: Building2 },
+    { link: "/albums", name: "Albums", icon: Images },
   ];
 
   useEffect(() => {
@@ -62,8 +62,8 @@ export default function Sidebar({
         </li>
         {navItems.map((item) => (
           <li key={item.name} className="relative">
-            <a
-              href="#"
+            <Link
+              href={item.link}
               className="flex items-center p-4 hover:bg-gray-700 transition-colors duration-200"
               aria-label={item.name}
             >
@@ -76,9 +76,22 @@ export default function Sidebar({
               >
                 {item.name}
               </span>
-            </a>
+            </Link>
           </li>
         ))}
+        <li className="relative">
+          <div className="flex items-center p-4 hover:bg-gray-700 transition-colors duration-200">
+            <Ellipsis className="w-6 h-6 min-w-[1.5rem]" />
+            <span
+              className={cn(
+                "ml-4 transition-opacity duration-300 whitespace-nowrap opacity-0 md:group-hover:opacity-100",
+                expanded && "opacity-100"
+              )}
+            >
+              More
+            </span>
+          </div>
+        </li>
       </ul>
     </nav>
   );
