@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, Mail, PanelLeftOpen, Search, X } from "lucide-react";
+import { Bell, Mail, PanelLeftOpen, Search } from "lucide-react";
 import GlobalSearch from "./global-search";
 
 export default function Navbar({

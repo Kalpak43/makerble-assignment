@@ -1,6 +1,4 @@
 import {
-  ArrowDown01,
-  ArrowDown10,
   ArrowDownWideNarrow,
   ArrowUpWideNarrow,
   Filter,

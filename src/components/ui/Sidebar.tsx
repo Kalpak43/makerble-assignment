@@ -3,9 +3,6 @@
 import { useEffect } from "react";
 import {
   Home,
-  Mail,
-  Calendar,
-  FileText,
   PanelLeftClose,
   FolderGit2,
   Building2,

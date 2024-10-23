@@ -16,7 +16,6 @@ export const CollapsibleTitle = ({ children }: { children: React.ReactNode }) =>
 };
 
 export default function CollapsibleCard({
-  title,
   children,
   className,
 }: CollapsibleCardProps) {

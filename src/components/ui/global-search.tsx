@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useEffect } from "react";
 import { Input } from "./input";
 import { X } from "lucide-react";
@@ -6,7 +8,6 @@ import { users } from "@/fakeDB/users";
 import { contacts } from "@/fakeDB/contact";
 
 export default function GlobalSearch({
-  revealSearch,
   setRevealSearch,
 }: {
   revealSearch: boolean;
@@ -27,7 +28,7 @@ export default function GlobalSearch({
       email: string;
       phone: string;
     }[];
-    projects: any[];
+    projects: string[];
   }>({
     users: [],
     contacts: [],
@@ -49,7 +50,7 @@ export default function GlobalSearch({
       search.length > 0
         ? queryDB()
         : setSearchResults({ users: [], contacts: [], projects: [] });
-    });
+    }, 500);
 
     return () => {
       clearTimeout(timeOut);
