@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Home,
   PanelLeftClose,
@@ -8,9 +8,22 @@ import {
   Building2,
   Images,
   Ellipsis,
+  ChevronDownIcon,
+  Star,
+  Laugh,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
+import Image from "next/image";
 
 export default function Sidebar({
   expanded,
@@ -25,6 +38,8 @@ export default function Sidebar({
     { link: "/organisations", name: "Organisations", icon: Building2 },
     { link: "/albums", name: "Albums", icon: Images },
   ];
+
+  const [revealMore, setRevealMore] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -60,12 +75,31 @@ export default function Sidebar({
             <PanelLeftClose />
           </button>
         </li>
+        <li>
+          <div className="block md:hidden  p-4">
+            <Select defaultValue="project-1">
+              <SelectTrigger className=" bg-transparent">
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="project-1">Project 1</SelectItem>
+                  <SelectItem value="project-2">Project 2</SelectItem>
+                  <SelectItem value="project-3">Project 3</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        </li>
         {navItems.map((item) => (
           <li key={item.name} className="relative">
             <Link
               href={item.link}
               className="flex items-center p-4 hover:bg-gray-700 transition-colors duration-200"
               aria-label={item.name}
+              onClick={() => {
+                closeSidebar();
+              }}
             >
               <item.icon className="w-6 h-6 min-w-[1.5rem]" />
               <span
@@ -80,8 +114,11 @@ export default function Sidebar({
           </li>
         ))}
         <li className="relative">
-          <div className="flex items-center p-4 hover:bg-gray-700 transition-colors duration-200">
-            <Ellipsis className="w-6 h-6 min-w-[1.5rem]" />
+          <button
+            className="block w-full flex p-4 hover:bg-gray-700 transition-colors duration-200"
+            onClick={() => setRevealMore((x) => !x)}
+          >
+            <Ellipsis className="w-6 h-6 min-w-[1.5rem] " />
             <span
               className={cn(
                 "ml-4 transition-opacity duration-300 whitespace-nowrap opacity-0 md:group-hover:opacity-100",
@@ -89,10 +126,89 @@ export default function Sidebar({
               )}
             >
               More
+              <ChevronDownIcon
+                className={`inline-block mx-1 ${
+                  revealMore ? "-rotate-180" : "rotate-0"
+                } transition-all duration-200`}
+              />
             </span>
-          </div>
+          </button>
+          <AnimatePresence initial={false}>
+            {revealMore && (
+              <motion.ul
+                initial="collapsed"
+                animate="expanded"
+                exit="collapsed"
+                variants={{
+                  expanded: { height: "auto", opacity: 1 },
+                  collapsed: { height: 0, opacity: 0 },
+                }}
+                transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                className={cn(
+                  " transition-opacity duration-300 whitespace-nowrap opacity-0 md:group-hover:opacity-100",
+                  expanded && "opacity-100"
+                )}
+              >
+                <li>
+                  <Link
+                    href={"/"}
+                    className="flex items-center p-4 pl-16 hover:bg-gray-700 transition-colors duration-200"
+                    onClick={() => {
+                      closeSidebar();
+                    }}
+                  >
+                    <Star className="w-6 h-6 min-w-[1.5rem] " />
+                    <span className="ml-4">Explore</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={"/"}
+                    className="flex items-center p-4 pl-16 hover:bg-gray-700 transition-colors duration-200"
+                    onClick={() => {
+                      closeSidebar();
+                    }}
+                  >
+                    <Laugh className="w-6 h-6 min-w-[1.5rem] " />
+                    <span className="ml-4">Option 1</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={"/"}
+                    className="flex items-center p-4 pl-16 hover:bg-gray-700 transition-colors duration-200"
+                    onClick={() => {
+                      closeSidebar();
+                    }}
+                  >
+                    <Laugh className="w-6 h-6 min-w-[1.5rem] " />
+                    <span className="ml-4">Option 2</span>
+                  </Link>
+                </li>
+              </motion.ul>
+            )}
+          </AnimatePresence>
         </li>
       </ul>
+
+      <div className="border-t-2 border-gray-600 md:hidden">
+        <Link
+          href={"/profile"}
+          onClick={() => {
+            closeSidebar();
+          }}
+          className="px-4 pt-4 flex items-center gap-2 overflow-hidden"
+        >
+          <Image
+            src="/default.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="border-2 rounded-full"
+          />
+          <p className="font-[600]">Kalpak Goshikwar</p>
+        </Link>
+      </div>
     </nav>
   );
 }

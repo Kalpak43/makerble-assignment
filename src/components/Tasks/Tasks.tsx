@@ -47,7 +47,7 @@ export default function Tasks({ className }: { className?: string }) {
   };
 
   return (
-    <CollapisbleCard className={"space-y-6 " + className}>
+    <CollapisbleCard className={"space-y-6 container py-2 px-4 rounded-lg " + className}>
       <CollapsibleTitle>
         <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">
           Tasks

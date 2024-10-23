@@ -45,7 +45,7 @@ export default function page({ params }: { params: Params }) {
   return (
     <main className="grid md:grid-cols-3 gap-4 h-full ">
       <div>
-        <CollapsibleCard className="max-h-[80vh] overflow-y-auto">
+        <CollapsibleCard className="max-h-[80vh] overflow-y-auto container py-2 px-4 rounded-lg space-y-6">
           <CollapsibleTitle>
             <div>
               <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">

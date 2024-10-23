@@ -17,10 +17,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, Mail, PanelLeftOpen, Search } from "lucide-react";
+import { Bell, Mail, PanelLeftOpen, Search, Star, User, X } from "lucide-react";
 import GlobalSearch from "./global-search";
 
 export default function Navbar({
@@ -29,6 +28,17 @@ export default function Navbar({
   toggleSidebar: () => void;
 }) {
   const [revealSearch, setRevealSearch] = React.useState(false);
+
+  const messages = [
+    {
+      title: "New Message 1 ",
+      message: "This is a new message 1",
+    },
+    {
+      title: "New Message 2",
+      message: "This is a new message 2",
+    },
+  ];
 
   return (
     <>
@@ -78,63 +88,66 @@ export default function Navbar({
             className="btn md:hidden"
             onClick={() => setRevealSearch(true)}
           >
-            <Search className="inline-block mx-1" size={20} />
+            <Search className="inline-block mx-1" size={16} />
           </button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="btn">
-                <Bell className="inline-block" size={20} />0
+                <Bell className="inline-block" size={16} />
+                <span className="ml-1 font-[600]">{0}</span>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup>
-                <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="bottom">
-                  Bottom
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="right">
-                  Right
-                </DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
+            <DropdownMenuContent className="w-56 p-4 space-y-4 mx-2">
+              <DropdownMenuLabel>Notification Panel</DropdownMenuLabel>
+              <div className="aspect-square text-sm text-center flex items-center justify-center">
+                <p>No Notifications here</p>
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="btn">
-                <Mail className="inline-block" size={20} />0
+                <Mail className="inline-block" size={16} />
+                <span className="ml-1 font-[600]">{messages.length}</span>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup>
-                <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="bottom">
-                  Bottom
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="right">
-                  Right
-                </DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
+            <DropdownMenuContent className="w-56 p-4 space-y-4 mx-2">
+              <DropdownMenuLabel>Messages Panel</DropdownMenuLabel>
+              <div className="text-xs space-y-2">
+                {messages.map((message) => (
+                  <div
+                    key={message.title}
+                    className="border-2 p-1 rounded-lg hover:border-gray-300 cursor-pointer relative"
+                  >
+                    <p className="font-[600]">{message.title}</p>
+                    <p>{message.message}</p>
+                    <button className="absolute top-0 right-0">
+                      <X className="inline-block" size={12} />
+                    </button>
+                  </div>
+                ))}
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className=" border-2 rounded-full hidden md:block">
-                <Image src="/logo.png" alt="Logo" width={40} height={40} />
+              <button className=" border-2 rounded-full hidden md:block overflow-hidden">
+                <Image src="/default.png" alt="Logo" width={40} height={40} />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+            <DropdownMenuContent className="w-56 mx-2">
               <DropdownMenuRadioGroup>
-                <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="bottom">
-                  Bottom
+                <DropdownMenuRadioItem value="top">
+                  <Link href={"/profile"} className="block w-full">
+                    <User className="mx-2 inline-block" size={16} />
+                    My Profile
+                  </Link>
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="right">
-                  Right
+                <DropdownMenuRadioItem value="top">
+                  <Star className="mx-2 inline-block" size={16} />
+                  <Link href={"/"} className="block w-full">
+                    Upgrade
+                  </Link>
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>

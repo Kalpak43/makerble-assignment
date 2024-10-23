@@ -129,6 +129,7 @@ export default function DetailedTemplateCard({
             {album.images.map((image, index) => {
               return (
                 <Image
+                  key={index}
                   src={image}
                   alt={album.name + index}
                   width={200}

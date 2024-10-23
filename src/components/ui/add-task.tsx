@@ -15,27 +15,37 @@ export default function TaskAdder({
   const [taskPriority, setTaskPriority] = React.useState(0);
 
   return (
-    <div className="flex gap-2 p-1">
-      <Input
-        type="text"
-        placeholder="Add a Task"
-        className="md:max-w-[500px] mx-auto focus-visible:ring-1"
-        value={taskTitle}
-        onChange={(e) => setTaskTitle(e.target.value)}
-      />
-      <Input
-        type="number"
-        placeholder="Priority"
-        className=" focus-visible:ring-1 max-w-fit md:max-w-[100px]"
-        min={0}
-        max={2}
-        value={taskPriority}
-        onChange={(e) =>
-          setTaskPriority(
-            Number(e.target.value) > 2 ? 2 : Number(e.target.value)
-          )
-        }
-      />
+    <div className="flex items-end gap-2 p-1">
+      <div className="md:max-w-[500px] w-full">
+        <label htmlFor="" className="text-xs">
+          Task
+        </label>
+        <Input
+          type="text"
+          placeholder="Add a Task"
+          className="w-full mx-auto focus-visible:ring-1"
+          value={taskTitle}
+          onChange={(e) => setTaskTitle(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="" className="text-xs">
+          Priority
+        </label>
+        <Input
+          type="number"
+          placeholder="Priority"
+          className=" focus-visible:ring-1 max-w-fit md:max-w-[100px]"
+          min={0}
+          max={2}
+          value={taskPriority}
+          onChange={(e) =>
+            setTaskPriority(
+              Number(e.target.value) > 2 ? 2 : Number(e.target.value)
+            )
+          }
+        />
+      </div>
       <Button
         className="bg-[var(--btn-primary)] hover:bg-[var(--btn-primary-hov)] font-[600]"
         title="Add Task"

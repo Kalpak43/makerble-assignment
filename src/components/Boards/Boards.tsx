@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
 import Modal from "../ui/modal";
+import Image from "next/image";
 
 export default function Boards({ className }: { className?: string }) {
   const [hidden, setHidden] = React.useState(true);
@@ -56,7 +57,9 @@ export default function Boards({ className }: { className?: string }) {
   };
 
   return (
-    <CollapisbleCard className={"space-y-6 " + className}>
+    <CollapisbleCard
+      className={"space-y-6 container py-2 px-4 rounded-lg " + className}
+    >
       <CollapsibleTitle>
         <div className="flex-1 flex items-center justify-between gap-2">
           <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">
@@ -85,8 +88,16 @@ export default function Boards({ className }: { className?: string }) {
               href={"/contact/"}
               className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200 transition-all duration-200"
             >
-              <div className="h-12 aspect-square border-2 rounded-full"></div>
-              <h3 className="text-sm font-[600]">Board 1</h3>
+              <div className="h-12 aspect-square border-2 rounded-full overflow-hidden">
+                <Image
+                  src={"/work-in-progress.jpg"}
+                  width={48}
+                  height={48}
+                  alt="board image"
+                  className=""
+                />
+              </div>
+              <h3 className="text-sm font-[600]">{board.name}</h3>
             </Link>
             <hr />
           </div>

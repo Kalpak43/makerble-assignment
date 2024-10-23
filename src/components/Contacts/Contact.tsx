@@ -14,7 +14,7 @@ export default function Contact({ className }: { className?: string }) {
   };
 
   return (
-    <CollapisbleCard className={"space-y-6 " + className}>
+    <CollapisbleCard className={"space-y-6 container py-2 px-4 rounded-lg " + className}>
       <CollapsibleTitle>
         <div className="flex-1 flex items-center justify-between">
           <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">

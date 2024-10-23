@@ -1,4 +1,5 @@
 import { Mail, Phone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -17,7 +18,15 @@ export default function ContactCard({
     <div key={email}>
       <div className="flex md:max-lg:flex-col md:max-lg:items-start items-center justify-between p-2 rounded-lg">
         <div className="flex items-center gap-2 ">
-          <div className="h-12 md:max-lg:h-8 aspect-square border-2 rounded-full"></div>
+          <div className="h-12 md:max-lg:h-8 aspect-square border-2 rounded-full">
+            <Image
+              src="/default.png"
+              alt={name}
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
+          </div>
           <Link
             href={"/contact/" + id}
             className="text-sm md:max-lg:text-xs font-[600] hover:underline"

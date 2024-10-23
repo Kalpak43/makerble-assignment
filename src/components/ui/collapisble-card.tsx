@@ -39,7 +39,7 @@ export default function CollapsibleCard({
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
   return (
-    <div className={cn("container py-2 px-4 rounded-lg", className)}>
+    <div className={cn("  ", className)}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === CollapsibleTitle) {
           return (
