@@ -1,6 +1,9 @@
 import {
+  Bookmark,
   ChevronDown,
   ChevronUp,
+  EyeOff,
+  FlagTriangleRight,
   Heart,
   MessageSquarePlus,
   SendHorizonal,
@@ -19,6 +22,7 @@ import {
 } from "./dropdown-menu";
 import { users } from "@/fakeDB/users";
 import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
 
 export default function NewsCard({
   id,
@@ -33,6 +37,7 @@ export default function NewsCard({
   createdOn: Date;
   editedOn: Date;
 }) {
+  const { toast } = useToast();
   const [isExpanded, setIsExpanded] = useState(false);
   const [hideCommentBar, setHideCommentBar] = useState(true);
 
@@ -50,9 +55,34 @@ export default function NewsCard({
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuRadioGroup>
-            <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem
+              value="top"
+              className="font-[600] cursor-pointer"
+              onClick={() => {
+                toast({ title: "Post Hidden" });
+              }}
+            >
+              <EyeOff className="inline-block mr-2" size={16} /> Hide Post
+            </DropdownMenuRadioItem>{" "}
+            <DropdownMenuRadioItem
+              value="top"
+              className="font-[600] cursor-pointer"
+              onClick={() => {
+                toast({ title: "Post saved" });
+              }}
+            >
+              <Bookmark className="inline-block mr-2" size={16} /> Save
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem
+              value="top"
+              className="font-[600] cursor-pointer"
+              onClick={() => {
+                toast({ variant: "destructive", title: "Post Reported to the admin" });
+              }}
+            >
+              <FlagTriangleRight className="inline-block mr-2" size={16} />{" "}
+              Report
+            </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>

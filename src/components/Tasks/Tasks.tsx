@@ -52,6 +52,11 @@ export default function Tasks({ className }: { className?: string }) {
         <h2 className="uppercase font-[600] text-xl text-[var(--text-heading)]">
           Tasks
         </h2>
+        {
+          <p className="text-sm text-gray-500 font-[600]">
+            {tasks.filter((task) => !task.completed).length} tasks remaining
+          </p>
+        }
       </CollapsibleTitle>
       <div className="space-y-4 pb-2 ">
         <TaskAdder addTask={addTask} />

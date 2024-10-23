@@ -7,6 +7,10 @@ import {
   Calendar,
   FileText,
   PanelLeftClose,
+  FolderGit2,
+  Building2,
+  Images,
+  Ellipsis,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -19,9 +23,10 @@ export default function Sidebar({
 }) {
   const navItems = [
     { name: "Home", icon: Home },
-    { name: "Messages", icon: Mail },
-    { name: "Calendar", icon: Calendar },
-    { name: "Documents", icon: FileText },
+    { name: "Projects", icon: FolderGit2 },
+    { name: "Organisations", icon: Building2 },
+    { name: "Albums", icon: Images },
+    { name: "More", icon: Ellipsis },
   ];
 
   useEffect(() => {

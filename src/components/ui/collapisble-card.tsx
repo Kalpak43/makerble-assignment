@@ -45,7 +45,7 @@ export default function CollapsibleCard({
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === CollapsibleTitle) {
           return (
-            <div className="flex justify-between items-center collapsible-title">
+            <div className="flex justify-between gap-2 items-center collapsible-title">
               {child}
               <button className="btn" onClick={toggleExpand}>
                 <ChevronDown
